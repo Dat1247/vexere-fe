@@ -1,0 +1,23 @@
+.warning-overlay {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+.warning-icon {
+	font-size: 3rem;
+}
+
+.warning-title {
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.warning-info {
+	font-size: 0.9rem;
+	color: rgb(63, 63, 63);
+}

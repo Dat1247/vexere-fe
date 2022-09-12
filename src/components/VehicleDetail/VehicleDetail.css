@@ -1,0 +1,112 @@
+.vehicleDetail {
+	margin: 20px 0;
+	border: 1px solid rgb(152, 148, 148);
+	border-radius: 5px;
+	transition: all 0.3s;
+}
+
+.vehicleDetail:hover {
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+		rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.vehicleDetail__info {
+	display: flex;
+	justify-content: space-between;
+	margin-left: 1rem;
+}
+
+.vehicleDetail__info p {
+	margin-bottom: 0;
+}
+
+.vehicleDetail__infoRight,
+.vehicleDetail__infoLeft {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.vehicleDetail__infoLeft h4 {
+	font-size: 1.2rem;
+	color: rgb(72, 72, 72);
+}
+
+.vehicleDetail__infoLeft > p {
+	font-size: 1rem;
+	color: rgb(72, 72, 72);
+}
+
+.vehicleDetail__infoLeft > p span {
+	font-size: 1.3rem;
+	font-weight: bold;
+}
+
+.vehicleDetail__infoRight {
+	text-align: right;
+}
+
+.vehicleDetail__infoRight > p {
+	font-size: 1.3rem;
+}
+
+.vehicleDetail__infoRight > div p {
+	margin-bottom: 1rem;
+}
+
+.vehicleDetail__infoRight > div button {
+	padding: 0.5rem 1rem;
+	background-color: rgb(219, 178, 42);
+	transition: all 0.5s;
+}
+
+.vehicleDetail__infoRight > div button:hover {
+	background-color: rgb(181, 146, 30);
+}
+
+@media screen and (max-width: 992px) {
+	.vehicleDetail__info {
+		margin-left: 0.5rem;
+	}
+	.vehicleDetail__infoRight {
+		max-width: 150px;
+	}
+	.vehicleDetail__infoLeft h4,
+	.vehicleDetail__infoLeft > p span,
+	.vehicleDetail__infoRight > p {
+		font-size: 1.1rem;
+	}
+	.vehicleDetail__infoRight > div p {
+		font-size: 0.8rem;
+	}
+	.vehicleDetail__infoRight > div button {
+		padding: 0.5rem 0.75rem;
+		font-size: 1rem;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.vehicleDetail {
+		margin: 15px 0;
+	}
+	.vehicleDetail__info {
+		margin-left: 0.5rem;
+	}
+	.vehicleDetail__infoRight {
+		max-width: 150px;
+	}
+	.vehicleDetail__infoLeft h4,
+	.vehicleDetail__infoRight > p {
+		font-size: 1rem;
+	}
+	.vehicleDetail__infoLeft > p {
+		font-size: 0.8rem;
+	}
+	.vehicleDetail__infoLeft > p span {
+		font-size: 1.1rem;
+	}
+	.vehicleDetail__infoRight > div button {
+		padding: 0.25rem 0.5rem;
+		font-size: 0.8rem;
+	}
+}

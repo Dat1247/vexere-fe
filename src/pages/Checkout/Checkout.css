@@ -1,0 +1,142 @@
+.ant-tabs .ant-tabs-nav {
+	box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.1);
+	padding: 1rem 5rem;
+}
+.ant-tabs-top > .ant-tabs-nav {
+	margin-bottom: 2rem;
+}
+
+.noteBoard > p {
+	font-size: 1.1rem;
+	font-weight: 600;
+}
+
+.noteBoard div {
+	display: flex;
+	margin-bottom: 1rem;
+	align-items: center;
+}
+
+.noteBoard div button {
+	margin-right: 0.5rem;
+}
+
+.coach-container {
+	min-width: 180px;
+	padding: 16px;
+	width: 180px;
+	background-color: rgb(219, 219, 219);
+	border: 1px solid #000000;
+	border-radius: 4px;
+}
+
+.coach-container_NGH {
+	width: 210px;
+	background-color: rgb(219, 219, 219);
+	border: 1px solid #000000;
+	padding: 16px;
+	border-radius: 4px;
+}
+
+.coach-container_NGH .listSeat .seat {
+	height: 40px;
+	width: 100%;
+}
+
+.coach-container > p {
+	text-align: center;
+	margin-bottom: 0.5rem;
+	color: #666565;
+}
+
+.driverSeat {
+	margin-bottom: 1rem;
+}
+
+.spaceSeat {
+	height: 45px;
+}
+
+.seat {
+	width: 35px;
+	height: 50px;
+	border: 1px solid #000;
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+}
+
+.seat span {
+	font-size: 0.8rem;
+}
+
+.seatChose {
+	background-color: rgb(69, 68, 68);
+	color: #fff;
+	cursor: no-drop;
+}
+
+.seatChoosing {
+	background-color: rgb(47, 85, 174);
+	color: #fff;
+}
+
+.payment h4 {
+	font-size: 1.1rem;
+	margin-bottom: 1rem;
+}
+
+.listPayments,
+.detailCheckout {
+	border: 1px solid rgb(152, 148, 148);
+	border-radius: 2px;
+	padding: 1rem;
+}
+
+.listPayments .ant-radio-group,
+.listPayments .ant-space {
+	width: 100%;
+}
+
+.listPayments .ant-space-item {
+	border-bottom: 1px solid rgb(152, 148, 148);
+	padding: 1rem 0;
+}
+.listPayments .ant-space-item:last-child {
+	border-bottom: none;
+	padding: 1rem 0 0;
+}
+
+.listPayments .ant-radio-inner {
+	border-color: rgba(0, 0, 0, 0.892);
+	border-width: 2px;
+}
+
+.listPayments .ant-radio-wrapper {
+	align-items: flex-start;
+}
+
+.detailProfile .detailCheckout__box:last-child {
+	margin-bottom: 1rem;
+}
+
+.detailCheckout .detailVehicle {
+	border-top: 1px solid rgb(152, 148, 148);
+}
+.detailCheckout__box {
+	margin-top: 1rem;
+}
+.detailCheckout__box h5 {
+	font-size: 0.9rem;
+	color: rgb(152, 148, 148);
+	margin-bottom: 0;
+}
+.detailCheckout__box p {
+	margin-bottom: 0;
+}
+
+.checkPayment {
+	margin-top: 1rem;
+}

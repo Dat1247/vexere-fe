@@ -1,0 +1,99 @@
+.formSearch {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.formSearch .ant-select,
+.formSearch .ant-picker {
+	width: 230px;
+	height: 70px;
+}
+
+.formSearch
+	.ant-select-single.ant-select-lg:not(.ant-select-customize-input)
+	.ant-select-selector {
+	padding: 16px;
+	height: 70px;
+	font-size: 20px;
+}
+
+.formSearch
+	.ant-select-single.ant-select-lg:not(.ant-select-customize-input):not(.ant-select-customize-input)
+	.ant-select-selection-search-input {
+	height: 70px;
+}
+
+.formSearch input {
+	font-size: 20px;
+}
+
+.formSearch button {
+	padding: 1rem 1.5rem;
+	font-size: 1.5rem;
+	background-color: rgb(219, 178, 42);
+	color: white;
+	font-weight: 600;
+	letter-spacing: 1.2px;
+}
+
+@media screen and (max-width: 768px) {
+	.formSearch .ant-select {
+		width: 175px;
+		height: auto;
+	}
+	.formSearch .ant-picker {
+		width: 150px;
+		height: 46px;
+	}
+	.formSearch
+		.ant-select-single.ant-select-lg:not(.ant-select-customize-input)
+		.ant-select-selector {
+		padding: 0.25rem 0.6rem;
+		font-size: 1rem;
+		height: 46px;
+	}
+	.formSearch
+		.ant-select-single.ant-select-lg:not(.ant-select-customize-input):not(.ant-select-customize-input)
+		.ant-select-selection-search-input {
+		height: 46px;
+	}
+	.formSearch input {
+		font-size: 15px;
+	}
+	.formSearch button {
+		padding: 0.4rem 1rem;
+		font-size: 1.2rem;
+		letter-spacing: 1px;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.formSearch .ant-select {
+		width: 175px;
+		height: auto;
+	}
+	.formSearch .ant-picker {
+		width: 150px;
+		height: 50px;
+	}
+	.formSearch
+		.ant-select-single.ant-select-lg:not(.ant-select-customize-input)
+		.ant-select-selector {
+		padding: 0.25rem 0.6rem;
+		font-size: 1rem;
+		height: 46px;
+	}
+	.formSearch
+		.ant-select-single.ant-select-lg:not(.ant-select-customize-input):not(.ant-select-customize-input)
+		.ant-select-selection-search-input {
+		height: 46px;
+	}
+	.formSearch input {
+		font-size: 15px;
+	}
+	.formSearch button {
+		padding: 0.25rem 1rem;
+		font-size: 1.1rem;
+		letter-spacing: 1px;
+	}
+}

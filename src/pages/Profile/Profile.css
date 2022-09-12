@@ -1,0 +1,42 @@
+.ticketItem {
+	padding: 16px;
+	border: 1px solid black;
+	border-radius: 8px;
+	transition: all 0.5s;
+}
+
+.ticketItem:hover {
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+		rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.ticketItem > p {
+	margin-bottom: 0.5rem;
+	font-weight: 600;
+	font-size: 1rem;
+}
+
+.ticketItem > p:last-of-type {
+	font-size: 0.95rem;
+}
+
+.historyTicket {
+	max-height: 600px;
+	overflow-y: scroll;
+	/* scrollbar-color: #d4aa70 #e4e4e4; */
+	scrollbar-width: thin;
+}
+
+/* .historyTicket::-webkit-scrollbar {
+	width: 10px;
+}
+
+.historyTicket::-webkit-scrollbar-track {
+	background-color: #e4e4e4;
+	border-radius: 100px;
+}
+
+.historyTicket::-webkit-scrollbar-track {
+	background-color: #d4aa70;
+	border-radius: 100px;
+} */
