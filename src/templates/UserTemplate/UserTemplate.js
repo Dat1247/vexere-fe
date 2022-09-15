@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { Route } from "react-router-dom";
 
 export const UserTemplate = (props) => {
 	const { Component } = props;

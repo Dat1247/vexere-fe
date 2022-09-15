@@ -38,6 +38,7 @@ export function* rootSaga() {
 
 		VehicleManagementSaga.theoDoiGetListVehicleSaga(),
 		VehicleManagementSaga.theoDoiGetListVehicleTypeSaga(),
+		VehicleManagementSaga.theoDoiGetVehicleByIdSaga(),
 		VehicleManagementSaga.theoDoiCreateVehicleSaga(),
 		VehicleManagementSaga.theoDoiDeleteVehicleSaga(),
 		VehicleManagementSaga.theoDoiUpdateVehicleSaga(),

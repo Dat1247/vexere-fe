@@ -1,19 +1,19 @@
 import "./App.css";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Home from "./pages/Home/Home";
 import { UserTemplate } from "./templates/UserTemplate/UserTemplate";
+import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
+import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
+import DrawerHOC from "./HOC/DrawerHOC/DrawerHOC";
+import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import SearchTrip from "./pages/SearchTrip/SearchTrip";
-import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
 import Checkout from "./pages/Checkout/Checkout";
-import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
+import Profile from "./pages/Profile/Profile";
 import UsersManagement from "./pages/Admin/UsersManagement/UsersManagement";
 import StationsManagement from "./pages/Admin/StationsManagement/StationsManagement";
 import TripsManagement from "./pages/Admin/TripsManagement/TripsManagement";
-import DrawerHOC from "./HOC/DrawerHOC/DrawerHOC";
 import LoadingComponent from "./components/LoadingComponent/LoadingComponent";
-import Profile from "./pages/Profile/Profile";
 import CarCompanyManagement from "./pages/Admin/CarCompanyManagement/CarCompanyManagement";
 import VehicleManagement from "./pages/Admin/VehicleManagement/VehicleManagement";
 

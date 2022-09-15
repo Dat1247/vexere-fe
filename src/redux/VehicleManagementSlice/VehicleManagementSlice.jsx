@@ -6,6 +6,7 @@ export const VehicleManagementSlice = createSlice({
 		listVehicle: [],
 		listVehicleType: [],
 		objVehicleEdit: {},
+		vehicleDetail: {},
 	},
 	reducers: {
 		getVehicleList: (state, action) => {
@@ -17,6 +18,9 @@ export const VehicleManagementSlice = createSlice({
 		getObjVehicleEdit: (state, action) => {
 			state.objVehicleEdit = action.payload;
 		},
+		getVehicleDetailCheckout: (state, action) => {
+			state.vehicleDetail = action.payload;
+		},
 	},
 });
 
@@ -25,6 +29,7 @@ export const {
 	getVehicleTypeList,
 	getObjVehicleEdit,
 	getListSeat,
+	getVehicleDetailCheckout,
 } = VehicleManagementSlice.actions;
 
 export default VehicleManagementSlice.reducer;

@@ -1,5 +1,6 @@
 .searchTrip h2 {
-	font-size: 1.2rem;
+	font-size: 1.3rem;
+	letter-spacing: 1px;
 }
 
 .searchTrip .formSearch .ant-select,
@@ -34,15 +35,6 @@
 	letter-spacing: 1px;
 }
 
-.searchTrip__listTrip-right h3 {
-	font-size: 1.4rem;
-	letter-spacing: 0.5px;
-}
-
-.searchTrip__listTrip-right h3 span {
-	color: rgb(72, 72, 72);
-}
-
 .timeFill {
 	border: 1px solid rgb(152, 148, 148);
 	border-radius: 4px;
@@ -62,7 +54,7 @@
 }
 
 .timeFill p:first-of-type {
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.25rem;
 }
 
 .filterBox .ant-checkbox-group-item {
@@ -92,23 +84,12 @@
 	align-items: center;
 }
 
-#timeMidNight:checked + div {
-	border-color: rgb(51, 51, 247);
-	transition: all 0.7s;
-}
-
-#timeMorning:checked + div {
-	border-color: rgb(51, 51, 247);
-	transition: all 0.7s;
-}
-
-#timeAfternoon:checked + div {
-	border-color: rgb(51, 51, 247);
-	transition: all 0.7s;
-}
-
+#timeMidNight:checked + div,
+#timeMorning:checked + div,
+#timeAfternoon:checked + div,
 #timeEvening:checked + div {
 	border-color: rgb(51, 51, 247);
+	color: rgb(51, 51, 247);
 	transition: all 0.7s;
 }
 
@@ -116,6 +97,17 @@
 	.ant-checkbox-wrapper.ant-checkbox-wrapper-checked.ant-checkbox-group-item
 	.timeFill {
 	border-color: blue;
+}
+
+.searchTrip__listTrip-right h3 {
+	font-size: 1.4rem;
+	letter-spacing: 0.5px;
+}
+
+.searchTrip__listTrip-right h3 span {
+	color: rgb(91, 91, 91);
+	font-weight: 600;
+	font-style: italic;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023.99px) {

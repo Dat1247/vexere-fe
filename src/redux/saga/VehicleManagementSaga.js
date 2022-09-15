@@ -1,12 +1,12 @@
 import { createAction } from "@reduxjs/toolkit";
-import { call, put, takeLatest, select } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { Notification } from "../../components/NotificationComponent/NotificationComponent";
 import { VehicleService } from "../../services/VehicleService";
-import { TOKEN, USER_LOGIN } from "../../util/config";
 import { closeVisibleDrawer } from "../DrawerHOCSlice/DrawerSlice";
 import { closeLoading, openLoading } from "../LoadingSlice/LoadingSlice";
 import { getListSeats } from "../SeatManagementSlice/SeatManagementSlice";
 import {
+	getVehicleDetailCheckout,
 	getVehicleList,
 	getVehicleTypeList,
 } from "../VehicleManagementSlice/VehicleManagementSlice";
@@ -28,6 +28,9 @@ export const updateVehicleAsync = createAction(
 );
 export const getListSeatsAsync = createAction(
 	"vehicleManagementSaga/getListSeatsAsync"
+);
+export const getVehicleDetailByIdAsync = createAction(
+	"vehicleManagementSaga/getVehicleDetailByIdAsync"
 );
 
 function* getListVehicleSaga(action) {
@@ -67,6 +70,24 @@ function* getListVehicleTypeSaga(action) {
 
 export function* theoDoiGetListVehicleTypeSaga() {
 	yield takeLatest(getVehicleTypeAsync.type, getListVehicleTypeSaga);
+}
+
+function* getVehicleByIdSaga(action) {
+	try {
+		const { data, status } = yield call(() =>
+			VehicleService.getVehicleById(action.payload)
+		);
+
+		if (status === 200) {
+			yield put(getVehicleDetailCheckout(data.data[0]));
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+export function* theoDoiGetVehicleByIdSaga() {
+	yield takeLatest(getVehicleDetailByIdAsync.type, getVehicleByIdSaga);
 }
 
 function* createVehicleSaga(action) {

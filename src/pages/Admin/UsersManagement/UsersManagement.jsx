@@ -13,16 +13,12 @@ import { IMAGE_URL } from "../../../util/config";
 const { Search } = Input;
 
 export default function UsersManagement(props) {
-	const { listUser, listUserSearch } = useSelector(
-		(state) => state.userManagement
-	);
+	const { listUserSearch } = useSelector((state) => state.userManagement);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getAllUsersAsync());
 	}, []);
-
-	console.log("listUser", listUser);
 
 	const columns = [
 		{
@@ -153,7 +149,6 @@ export default function UsersManagement(props) {
 							Title: "Add new user",
 						})
 					);
-					// toggleAdd();
 				}}>
 				Add User
 			</Button>
@@ -167,16 +162,7 @@ export default function UsersManagement(props) {
 				}}
 				className='mb-4'
 			/>
-			{/* <Modal
-				isShowing={isShowingAdd}
-				hide={toggleAdd}
-				Component={AddUserForm}
-			/>
-			<Modal
-				isShowing={isShowingEdit}
-				hide={toggleEdit}
-				Component={EditUserForm}
-			/> */}
+
 			<Table columns={columns} dataSource={listUserSearch} rowKey={"id"} />
 		</div>
 	);

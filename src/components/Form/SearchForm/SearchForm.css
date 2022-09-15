@@ -6,21 +6,21 @@
 .formSearch .ant-select,
 .formSearch .ant-picker {
 	width: 230px;
-	height: 70px;
+	height: 60px;
 }
 
 .formSearch
 	.ant-select-single.ant-select-lg:not(.ant-select-customize-input)
 	.ant-select-selector {
-	padding: 16px;
-	height: 70px;
-	font-size: 20px;
+	padding: 10px;
+	height: 60px;
+	font-size: 18px;
 }
 
 .formSearch
 	.ant-select-single.ant-select-lg:not(.ant-select-customize-input):not(.ant-select-customize-input)
 	.ant-select-selection-search-input {
-	height: 70px;
+	height: 60px;
 }
 
 .formSearch input {
@@ -28,7 +28,7 @@
 }
 
 .formSearch button {
-	padding: 1rem 1.5rem;
+	padding: 0 1.5rem;
 	font-size: 1.5rem;
 	background-color: rgb(219, 178, 42);
 	color: white;

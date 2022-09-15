@@ -1,7 +1,7 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Checkbox, InputNumber, Slider } from "antd";
 
 import { SearchForm } from "../../components/Form/SearchForm/SearchForm";
@@ -11,6 +11,17 @@ import "./SearchTrip.css";
 import { searchTripAsync } from "../../redux/saga/TripManagementSaga";
 import { getListTripFilter } from "../../redux/TripManagementSlice/TripManagementSlice";
 import { getAllCarCompaniesAsync } from "../../redux/saga/CarCompanyManagementSaga";
+
+const listTypeVehicle = [
+	{
+		label: "Ghế ngồi",
+		value: "GNG",
+	},
+	{
+		label: "Giường nằm",
+		value: "GN",
+	},
+];
 
 export default function SearchTrip() {
 	const param = useParams();
@@ -24,6 +35,16 @@ export default function SearchTrip() {
 	const { listCarCompanies } = useSelector(
 		(state) => state.carCompanyManagement
 	);
+
+	const [filterCheck, setFilterCheck] = useState({
+		minPrice: 0,
+		maxPrice: 1000000,
+		seatRemaining: 1,
+		carCompanies: [],
+		typeVehicles: [],
+		startTimes: [],
+	});
+
 	useEffect(() => {
 		dispatch(listProvinceAsync());
 		dispatch(
@@ -35,18 +56,6 @@ export default function SearchTrip() {
 		);
 		dispatch(getAllCarCompaniesAsync());
 	}, [param]);
-
-	const [filterCheck, setFilterCheck] = useState({
-		minPrice: 0,
-		maxPrice: 1000000,
-		seatRemaining: 1,
-		carCompanies: [],
-		typeVehicles: [],
-		startTimes: [],
-	});
-
-	console.log("param", param);
-	console.log("listTripSearch", listTripSearch);
 
 	const today = new Date();
 	const timeNow = moment(today).format("HH:mm");
@@ -61,7 +70,6 @@ export default function SearchTrip() {
 
 	const onClickTime = (e, timeCompare, timeStart, id) => {
 		if (!compareTime(timeNow, timeCompare) && dateNow === param.time) {
-			console.log("timeCheck");
 			return;
 		}
 
@@ -107,20 +115,124 @@ export default function SearchTrip() {
 		});
 	};
 
-	const listTypeVehicle = [
-		{
-			label: "Ghế ngồi",
-			value: "GNG",
-		},
-		{
-			label: "Giường nằm",
-			value: "GN",
-		},
-	];
-
 	const renderVehicle = () => {
 		return listTripFilter.map((vehicle, index) => {
 			return <VehicleDetail vehicleDetail={vehicle} key={index} />;
+		});
+	};
+
+	const filterVehicleFunction = (
+		listTrip,
+		startTimes,
+		typeVehicles,
+		carCompanies,
+		seatRemaining,
+		min,
+		max
+	) => {
+		return listTrip.filter((item) => {
+			const time = moment(item.startTime).format("HH:mm:ss");
+
+			if (
+				startTimes.length <= 0 &&
+				typeVehicles.length <= 0 &&
+				carCompanies.length <= 0
+			) {
+				return (
+					Number(item.price) >= min &&
+					Number(item.price) <= max &&
+					Number(item.seatRemaining) >= seatRemaining
+				);
+			}
+			if (startTimes.length <= 0) {
+				if (typeVehicles.length <= 0) {
+					return (
+						Number(item.price) >= min &&
+						Number(item.price) <= max &&
+						Number(item.seatRemaining) >= seatRemaining &&
+						carCompanies.includes(item.companyCarName)
+					);
+				}
+				if (carCompanies.length <= 0) {
+					return (
+						Number(item.price) >= min &&
+						Number(item.price) <= max &&
+						Number(item.seatRemaining) >= seatRemaining &&
+						typeVehicles.includes(item.typeVehicle)
+					);
+				}
+
+				return (
+					Number(item.price) >= min &&
+					Number(item.price) <= max &&
+					Number(item.seatRemaining) >= seatRemaining &&
+					typeVehicles.includes(item.typeVehicle) &&
+					carCompanies.includes(item.companyCarName)
+				);
+			}
+			if (typeVehicles.length <= 0) {
+				if (carCompanies.length <= 0) {
+					return (
+						Number(item.price) >= min &&
+						Number(item.price) <= max &&
+						Number(item.seatRemaining) >= seatRemaining &&
+						time >= startTimes[0].timeStart &&
+						time <= startTimes[startTimes.length - 1].timeCompare
+					);
+				}
+				if (startTimes.length <= 0) {
+					return (
+						Number(item.price) >= min &&
+						Number(item.price) <= max &&
+						Number(item.seatRemaining) >= seatRemaining &&
+						carCompanies.includes(item.companyCarName)
+					);
+				}
+				return (
+					Number(item.price) >= min &&
+					Number(item.price) <= max &&
+					Number(item.seatRemaining) >= seatRemaining &&
+					time >= startTimes[0].timeStart &&
+					time <= startTimes[startTimes.length - 1].timeCompare &&
+					carCompanies.includes(item.companyCarName)
+				);
+			}
+			if (carCompanies.length <= 0) {
+				if (startTimes.length <= 0) {
+					return (
+						Number(item.price) >= min &&
+						Number(item.price) <= max &&
+						Number(item.seatRemaining) >= seatRemaining &&
+						typeVehicles.includes(item.typeVehicle)
+					);
+				}
+				if (typeVehicles.length <= 0) {
+					return (
+						Number(item.price) >= min &&
+						Number(item.price) <= max &&
+						Number(item.seatRemaining) >= seatRemaining &&
+						time >= startTimes[0].timeStart &&
+						time <= startTimes[startTimes.length - 1].timeCompare
+					);
+				}
+				return (
+					Number(item.price) >= min &&
+					Number(item.price) <= max &&
+					Number(item.seatRemaining) >= seatRemaining &&
+					time >= startTimes[0].timeStart &&
+					time <= startTimes[startTimes.length - 1].timeCompare &&
+					typeVehicles.includes(item.typeVehicle)
+				);
+			}
+			return (
+				Number(item.price) >= min &&
+				Number(item.price) <= max &&
+				Number(item.seatRemaining) >= seatRemaining &&
+				time >= startTimes[0].timeStart &&
+				time <= startTimes[startTimes.length - 1].timeCompare &&
+				typeVehicles.includes(item.typeVehicle) &&
+				carCompanies.includes(item.companyCarName)
+			);
 		});
 	};
 
@@ -134,111 +246,15 @@ export default function SearchTrip() {
 			seatRemaining,
 		} = filterCheck;
 
-		const result = listTripSearch.filter((item) => {
-			const time = moment(item.startTime).format("HH:mm:ss");
-
-			if (
-				startTimes.length <= 0 &&
-				typeVehicles.length <= 0 &&
-				carCompanies.length <= 0
-			) {
-				return (
-					Number(item.price) >= minPrice &&
-					Number(item.price) <= maxPrice &&
-					Number(item.seatRemaining) >= seatRemaining
-				);
-			}
-			if (startTimes.length <= 0) {
-				if (typeVehicles.length <= 0) {
-					return (
-						Number(item.price) >= minPrice &&
-						Number(item.price) <= maxPrice &&
-						Number(item.seatRemaining) >= seatRemaining &&
-						carCompanies.includes(item.companyCarName)
-					);
-				}
-				if (carCompanies.length <= 0) {
-					return (
-						Number(item.price) >= minPrice &&
-						Number(item.price) <= maxPrice &&
-						Number(item.seatRemaining) >= seatRemaining &&
-						typeVehicles.includes(item.typeVehicle)
-					);
-				}
-
-				return (
-					Number(item.price) >= minPrice &&
-					Number(item.price) <= maxPrice &&
-					Number(item.seatRemaining) >= seatRemaining &&
-					typeVehicles.includes(item.typeVehicle) &&
-					carCompanies.includes(item.companyCarName)
-				);
-			}
-			if (typeVehicles.length <= 0) {
-				if (carCompanies.length <= 0) {
-					return (
-						Number(item.price) >= minPrice &&
-						Number(item.price) <= maxPrice &&
-						Number(item.seatRemaining) >= seatRemaining &&
-						time >= startTimes[0].timeStart &&
-						time <= startTimes[startTimes.length - 1].timeCompare
-					);
-				}
-				if (startTimes.length <= 0) {
-					return (
-						Number(item.price) >= minPrice &&
-						Number(item.price) <= maxPrice &&
-						Number(item.seatRemaining) >= seatRemaining &&
-						carCompanies.includes(item.companyCarName)
-					);
-				}
-				return (
-					Number(item.price) >= minPrice &&
-					Number(item.price) <= maxPrice &&
-					Number(item.seatRemaining) >= seatRemaining &&
-					time >= startTimes[0].timeStart &&
-					time <= startTimes[startTimes.length - 1].timeCompare &&
-					carCompanies.includes(item.companyCarName)
-				);
-			}
-			if (carCompanies.length <= 0) {
-				if (startTimes.length <= 0) {
-					return (
-						Number(item.price) >= minPrice &&
-						Number(item.price) <= maxPrice &&
-						Number(item.seatRemaining) >= seatRemaining &&
-						typeVehicles.includes(item.typeVehicle)
-					);
-				}
-				if (typeVehicles.length <= 0) {
-					return (
-						Number(item.price) >= minPrice &&
-						Number(item.price) <= maxPrice &&
-						Number(item.seatRemaining) >= seatRemaining &&
-						time >= startTimes[0].timeStart &&
-						time <= startTimes[startTimes.length - 1].timeCompare
-					);
-				}
-				return (
-					Number(item.price) >= minPrice &&
-					Number(item.price) <= maxPrice &&
-					Number(item.seatRemaining) >= seatRemaining &&
-					time >= startTimes[0].timeStart &&
-					time <= startTimes[startTimes.length - 1].timeCompare &&
-					typeVehicles.includes(item.typeVehicle)
-				);
-			}
-			return (
-				Number(item.price) >= minPrice &&
-				Number(item.price) <= maxPrice &&
-				Number(item.seatRemaining) >= seatRemaining &&
-				time >= startTimes[0].timeStart &&
-				time <= startTimes[startTimes.length - 1].timeCompare &&
-				typeVehicles.includes(item.typeVehicle) &&
-				carCompanies.includes(item.companyCarName)
-			);
-		});
-		console.log("result", result);
+		const result = filterVehicleFunction(
+			listTripSearch,
+			startTimes,
+			typeVehicles,
+			carCompanies,
+			seatRemaining,
+			minPrice,
+			maxPrice
+		);
 
 		dispatch(getListTripFilter(result));
 	};
@@ -262,7 +278,7 @@ export default function SearchTrip() {
 					<p className='flex justify-between'>
 						<span>Bộ lọc tìm kiếm</span>
 						<span
-							className='text-blue-500 hover:text-blue-700 cursor-pointer duration-500'
+							className='text-blue-500 hover:text-blue-800 cursor-pointer duration-500'
 							onClick={() => {
 								setFilterCheck({
 									minPrice: 0,

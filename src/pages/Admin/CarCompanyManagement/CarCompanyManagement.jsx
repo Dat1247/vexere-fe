@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Tag, Table, Tooltip, Popconfirm, Input } from "antd";
+import { Button, Table, Tooltip, Popconfirm, Input } from "antd";
 import { FormOutlined, DeleteOutlined } from "@ant-design/icons";
-import { getAllTripAsync } from "../../../redux/saga/TripManagementSaga";
 import { openVisibleDrawer } from "../../../redux/DrawerHOCSlice/DrawerSlice";
 import {
 	deleteCarCompanyAsync,
 	getAllCarCompaniesAsync,
 } from "../../../redux/saga/CarCompanyManagementSaga";
-import { API_URL, IMAGE_URL } from "../../../util/config";
+import { IMAGE_URL } from "../../../util/config";
 import { getObjCarCompanyEdit } from "../../../redux/CarCompanyManagementSlice/CarCompanyManagementSlice";
 
 const { Search } = Input;
@@ -22,8 +21,6 @@ export default function CarCompanyManagement() {
 	useEffect(() => {
 		dispatch(getAllCarCompaniesAsync());
 	}, []);
-
-	console.log(listCarCompanies);
 
 	const columns = [
 		{

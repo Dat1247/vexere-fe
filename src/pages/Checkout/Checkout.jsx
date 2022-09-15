@@ -3,13 +3,16 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./Checkout.css";
 import { Tabs, Radio, Space, Popover } from "antd";
+import moment from "moment";
 import { DoubleLeftOutlined } from "@ant-design/icons";
 import {
 	addSeatToListChoosing,
 	changeTabActive,
 } from "../../redux/SeatManagementSlice/SeatManagementSlice";
-import { getListSeatsAsync } from "../../redux/saga/VehicleManagementSaga";
-import moment from "moment";
+import {
+	getListSeatsAsync,
+	getVehicleDetailByIdAsync,
+} from "../../redux/saga/VehicleManagementSaga";
 import { IMAGE_URL, TOKEN, USER_LOGIN } from "../../util/config";
 import { datVeAsync } from "../../redux/saga/UserManagementSaga";
 import {
@@ -17,22 +20,19 @@ import {
 	setParamLink,
 } from "../../redux/LoadingSlice/LoadingSlice";
 import WarningPage from "../WarningPage/WarningPage";
+
 const { TabPane } = Tabs;
 
 export const Checkout = (props) => {
-	const { vehicleDetail, id } = props;
-
-	const listSeats = useSelector((state) => state.seatManagement.listSeats);
-	const listChoosing = useSelector(
-		(state) => state.seatManagement.listChoosing
+	const { id, vehicleDetail } = props;
+	const { listSeats, listChoosing } = useSelector(
+		(state) => state.seatManagement
 	);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getListSeatsAsync(id));
 	}, []);
-
-	console.log("listChoosing", listChoosing);
 
 	const renderSeat1Floor = () => {
 		return listSeats
@@ -217,14 +217,24 @@ export const Checkout = (props) => {
 						{(vehicleDetail?.price * listChoosing.length).toLocaleString()}đ
 					</p>
 					<div className='py-4 border-y-2'>
-						<p>
-							Điểm đi: {vehicleDetail?.fromSta} - Điểm đến:{" "}
-							{vehicleDetail?.toSta}{" "}
-						</p>
+						<div className='mb-4'>
+							<p className='mb-0'>
+								Điểm đi:{" "}
+								<span className='font-bold'>
+									{vehicleDetail?.fromStationName}
+								</span>
+							</p>
+							<p className='mb-0'>
+								Điểm đến:{" "}
+								<span className='font-bold'>
+									{vehicleDetail?.toStationName}
+								</span>
+							</p>
+						</div>
 						<p className='text-xl font-semibold'>
-							Nhà xe: {vehicleDetail?.companyCarName}
+							Nhà xe: {vehicleDetail?.carCompanyName}
 						</p>
-						<p className='text-lg mb-0'>
+						<p className='mb-0'>
 							Thời gian:{" "}
 							{moment(vehicleDetail?.startTime).format("DD-MM-YYYY HH:mm:ss")}
 						</p>
@@ -455,7 +465,7 @@ export const ConfirmPayment = (props) => {
 							</div>
 							<div className='detailCheckout__box'>
 								<h5>Nhà xe</h5>
-								<p>{vehicleDetail?.companyCarName}</p>
+								<p>{vehicleDetail?.carCompanyName}</p>
 							</div>
 							<div className='detailCheckout__box'>
 								<h5>Thời gian</h5>
@@ -467,11 +477,11 @@ export const ConfirmPayment = (props) => {
 							</div>
 							<div className='detailCheckout__box'>
 								<h5>Điểm đến</h5>
-								<p>{vehicleDetail?.toSta}</p>
+								<p>{vehicleDetail?.toStationName}</p>
 							</div>
 							<div className='detailCheckout__box'>
 								<h5>Điểm đi</h5>
-								<p>{vehicleDetail?.fromSta}</p>
+								<p>{vehicleDetail?.fromStationName}</p>
 							</div>
 						</div>
 					</div>
@@ -483,7 +493,7 @@ export const ConfirmPayment = (props) => {
 									onClick={() => {
 										dispatch(
 											datVeAsync({
-												tripId: vehicleDetail.tripId,
+												tripId: vehicleDetail.id,
 												listSeatChoosing: listChoosing,
 											})
 										);
@@ -506,8 +516,8 @@ export default function CheckOutTab(props) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { activeTab } = useSelector((state) => state.seatManagement);
-	const { listTripSearch } = useSelector((state) => state.tripManagement);
 	const { userLogin } = useSelector((state) => state.userManagement);
+	const { vehicleDetail } = useSelector((state) => state.vehicleManagement);
 	const dispatch = useDispatch();
 	const [widthScreen, setWidthScreen] = useState(window.innerWidth);
 
@@ -515,14 +525,11 @@ export default function CheckOutTab(props) {
 		window.addEventListener("resize", () => {
 			setWidthScreen(window.innerWidth);
 		});
+		dispatch(getVehicleDetailByIdAsync(params.id));
 		return () => {
 			dispatch(changeTabActive("1"));
 		};
-	}, []);
-
-	const vehicleDetail = listTripSearch.find(
-		(item) => item.vehicleId == params.id
-	);
+	}, [dispatch]);
 
 	const content = (
 		<div>
@@ -562,7 +569,7 @@ export default function CheckOutTab(props) {
 	const operations = {
 		left: (
 			<div
-				className='mr-4 cursor-pointer  text-red-500 hover:text-red-700 duration-500'
+				className='mr-4 cursor-pointer  text-red-500 hover:text-red-800 duration-500'
 				onClick={() => {
 					if (activeTab == "2") {
 						dispatch(changeTabActive("1"));

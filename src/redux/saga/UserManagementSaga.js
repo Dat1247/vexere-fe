@@ -1,15 +1,11 @@
 import { createAction } from "@reduxjs/toolkit";
-import { call, put, takeLatest, select } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { Notification } from "../../components/NotificationComponent/NotificationComponent";
 import { UserService } from "../../services/UserService";
 import { TOKEN, USER_LOGIN } from "../../util/config";
 import { closeVisibleDrawer } from "../DrawerHOCSlice/DrawerSlice";
 import { closeLoading, openLoading } from "../LoadingSlice/LoadingSlice";
-import {
-	changeTabActive,
-	isBookTicketSuccess,
-	resetListChoosing,
-} from "../SeatManagementSlice/SeatManagementSlice";
+import { isBookTicketSuccess } from "../SeatManagementSlice/SeatManagementSlice";
 import {
 	getListTicketOfUser,
 	getListUser,
@@ -18,7 +14,6 @@ import {
 	login,
 	userSignUp,
 } from "../UserManagementSlice/UserManagementSlice";
-import { getListSeatsAsync } from "./VehicleManagementSaga";
 
 export const loginAsync = createAction("userManagement/loginSaga");
 export const signUpAsync = createAction("userManagement/signUpSaga");
@@ -171,9 +166,7 @@ function* updateUserSaga(action) {
 	yield put(openLoading());
 
 	try {
-		const { data, status } = yield call(() =>
-			UserService.updateUser(id, formData)
-		);
+		const { status } = yield call(() => UserService.updateUser(id, formData));
 		if (status === 200) {
 			Notification("success", "Cập nhật người dùng thành công!");
 			yield put(getAllUsersAsync());
@@ -232,6 +225,7 @@ export function* theoDoiUpdateUserProfileSaga() {
 
 function* datVeSaga(action) {
 	const { tripId, listSeatChoosing } = action.payload;
+
 	yield put(openLoading());
 	try {
 		const result = yield call(() =>

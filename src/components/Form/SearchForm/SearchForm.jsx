@@ -1,8 +1,8 @@
+import { useState } from "react";
 import moment from "moment";
 import { Select, DatePicker } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./SearchForm.css";
-import { useState } from "react";
 
 const { Option } = Select;
 
@@ -51,7 +51,7 @@ export const SearchForm = (props) => {
 			onSubmit={(e) => {
 				e.preventDefault();
 				const { from, to, time } = valueSelect;
-				console.log("valueInput", valueSelect);
+
 				if (from === "" || to === "" || time === "" || from === to) {
 					return;
 				} else {

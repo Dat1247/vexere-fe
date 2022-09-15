@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Tag, Table, Tooltip, Popconfirm, Input } from "antd";
+import { Button, Table, Tooltip, Popconfirm } from "antd";
 import { FormOutlined, DeleteOutlined } from "@ant-design/icons";
 import {
 	deleteTripAsync,
@@ -10,8 +10,6 @@ import { openVisibleDrawer } from "../../../redux/DrawerHOCSlice/DrawerSlice";
 import moment from "moment";
 import { getObjTripEdit } from "../../../redux/TripManagementSlice/TripManagementSlice";
 import { listProvinceAsync } from "../../../redux/saga/StationManagementSaga";
-
-const { Search } = Input;
 
 export default function TripsManagement(props) {
 	const { listTrip } = useSelector((state) => state.tripManagement);
@@ -135,8 +133,6 @@ export default function TripsManagement(props) {
 			width: "10%",
 		},
 	];
-
-	console.log("listTrip", listTrip);
 
 	return (
 		<div>

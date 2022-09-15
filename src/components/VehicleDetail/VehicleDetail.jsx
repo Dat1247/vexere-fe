@@ -3,9 +3,7 @@ import { IMAGE_URL } from "../../util/config";
 import "./VehicleDetail.css";
 import moment from "moment";
 import { MoreOutlined } from "@ant-design/icons";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getListSeatsAsync } from "../../redux/saga/VehicleManagementSaga";
+import { useDispatch } from "react-redux";
 import {
 	resetIsBookTicket,
 	resetListChoosing,
@@ -15,15 +13,10 @@ export const VehicleDetail = (props) => {
 	const {
 		companyCarImage,
 		companyCarName,
-		fromAddress,
-		fromProvince,
 		fromSta,
 		price,
 		startTime,
-		toAddress,
-		toProvince,
 		toSta,
-		tripId,
 		vehicleId,
 		vehicleName,
 		seatRemaining,
@@ -31,9 +24,6 @@ export const VehicleDetail = (props) => {
 	} = props.vehicleDetail;
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	useEffect(() => {
-		// dispatch(getListSeatsAsync(vehicleId));
-	}, []);
 
 	return (
 		<div className='vehicleDetail'>
@@ -55,7 +45,9 @@ export const VehicleDetail = (props) => {
 				<div className='col-span-3 vehicleDetail__info'>
 					<div className='vehicleDetail__infoLeft'>
 						<div>
-							<h4 className='font-bold'>{companyCarName}</h4>
+							<h4 className='font-bold'>
+								{vehicleName} - {companyCarName}
+							</h4>
 							<p className='italic'>
 								{typeVehicle === "GN" ? "Giường nằm" : "Ghế ngồi"}
 							</p>

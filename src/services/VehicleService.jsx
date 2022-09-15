@@ -8,6 +8,10 @@ export const VehicleService = {
 		return BaseService.get(`vehicles/getVehicleList`);
 	},
 
+	getVehicleById: (id) => {
+		return BaseService.get(`vehicles/${id}`);
+	},
+
 	getListVehicleTypes: () => {
 		return BaseService.get(`vehicles/vehicletypes`);
 	},

@@ -44,8 +44,8 @@ function* createTripSaga(action) {
 		if (status === 201) {
 			Notification("success", data.message);
 			yield put(getAllTripAsync());
-			yield put(closeLoading());
 			yield put(closeVisibleDrawer());
+			yield put(closeLoading());
 		}
 	} catch (err) {
 		Notification("error", "Create trip failed!");
